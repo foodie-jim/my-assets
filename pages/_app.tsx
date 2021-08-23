@@ -1,5 +1,3 @@
-// pages/_app.tsx
-/* eslint-disable react/jsx-props-no-spreading */
 import { FC, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
