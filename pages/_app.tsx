@@ -28,8 +28,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Top />
+        <Top>
           <Component {...pageProps} />
+        </Top>
       </ThemeProvider>
     </>
   );

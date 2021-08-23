@@ -1,7 +1,6 @@
 import { FC } from 'react';
 import { Button } from '@material-ui/core';
 import { GetServerSideProps } from 'next';
-import styles from '../styles/Home.module.css';
 
 interface SupProps {
   message: string;
@@ -12,7 +11,7 @@ interface SupProps {
 
 const Sup: FC<SupProps> = ({ message }: SupProps) => {
   return (
-    <div className={styles.container}>
+    <div>
       <Button color="primary" variant="contained">
         {message}
       </Button>

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { FC } from 'react';
 import clsx from 'clsx';
 import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -84,7 +83,7 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ children }) {
     const classes = useStyles();
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -159,6 +158,10 @@ export default function MiniDrawer() {
                     ))}
                 </List>
             </Drawer>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                {children}
+            </main>
         </div>
     );
 }
