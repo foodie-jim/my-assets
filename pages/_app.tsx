@@ -4,6 +4,11 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import theme from '@styles/theme';
+import Top from '../src/components/top';
+
+// TODO : Make Mini variant drawer permanent layout using material-ui
+// https://www.youtube.com/watch?v=0WbrOfmvjvU
+// https://www.youtube.com/watch?v=Ix1LZGBSp-E&t=10s
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -23,7 +28,8 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Component {...pageProps} />
+        <Top />
+          <Component {...pageProps} />
       </ThemeProvider>
     </>
   );
