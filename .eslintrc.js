@@ -33,6 +33,8 @@ module.exports = {
     'import/no-unresolved': 'error',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'],
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
     'import/order': [
       'error',
       {
