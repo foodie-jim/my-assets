@@ -1,14 +1,18 @@
 import React, { ReactNode } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
+import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, useTheme, Theme } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import LockIcon from '@material-ui/icons/Lock';
+import MenuIcon from '@material-ui/icons/Menu';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -19,12 +23,12 @@ const drawerWidth = 240;
 const menuItems = [
   {
     text: 'Exchange Rates',
-    icon: <MonetizationOnIcon color="secondary" />,
+    icon: <MonetizationOnIcon color="secondary" fontSize="large" />,
     path: '/exchange-rates',
   },
   {
     text: 'Encrypted Currency',
-    icon: <LockIcon color="secondary" />,
+    icon: <LockIcon color="secondary" fontSize="large" />,
     path: '/encrypted-currency',
   },
 ];
@@ -37,9 +41,26 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     drawer: {
       width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
     },
-    drawerPaper: {
+    drawerOpen: {
       width: drawerWidth,
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    drawerClose: {
+      transition: theme.transitions.create('width', {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+      overflowX: 'hidden',
+      width: theme.spacing(7) + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: theme.spacing(9) + 1,
+      },
     },
     active: {
       background: '#f4f4f4',
@@ -60,7 +81,19 @@ const useStyles = makeStyles((theme: Theme) =>
         duration: theme.transitions.duration.enteringScreen,
       }),
     },
-    toolbar: theme.mixins.toolbar,
+    toolbar: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      padding: theme.spacing(0, 1),
+      ...theme.mixins.toolbar,
+    },
+    menuButton: {
+      marginRight: 36,
+    },
+    hide: {
+      display: 'none',
+    },
   })
 );
 
@@ -68,19 +101,58 @@ interface AppLayoutProps {
   children: ReactNode;
 }
 
+// TODO if drawer is open, main page width, location should be changed
+
 const Layout = ({ children }: AppLayoutProps) => {
   const classes = useStyles();
+  const theme = useTheme();
   const router = useRouter();
-  const open = true;
+  const [open, setOpen] = React.useState(false);
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
       <AppBar className={clsx(classes.appBar, { [classes.appBarShift]: open })}>
         <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
+          >
+            <MenuIcon />
+          </IconButton>
           <Typography>my-assets</Typography>
         </Toolbar>
       </AppBar>
-      <Drawer className={classes.drawer} variant="permanent" anchor="left" classes={{ paper: classes.drawerPaper }}>
+      <Drawer
+        variant="permanent"
+        className={clsx(classes.drawer, {
+          [classes.drawerOpen]: open,
+          [classes.drawerClose]: !open,
+        })}
+        classes={{
+          paper: clsx({
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          }),
+        }}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
         <List>
           {menuItems.map((item) => (
             <Link href={item.path}>
