@@ -6,7 +6,7 @@ const Home: FC = () => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>my-assets</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
     </div>

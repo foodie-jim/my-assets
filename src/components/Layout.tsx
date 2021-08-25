@@ -10,6 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import LockIcon from '@material-ui/icons/Lock';
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
@@ -43,8 +44,21 @@ const useStyles = makeStyles((theme: Theme) =>
     active: {
       background: '#f4f4f4',
     },
-    appbar: {
+    appBar: {
+      width: '100%',
+      zIndex: theme.zIndex.drawer + 1,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.leavingScreen,
+      }),
+    },
+    appBarShift: {
+      marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
     toolbar: theme.mixins.toolbar,
   })
@@ -57,10 +71,11 @@ interface AppLayoutProps {
 const Layout = ({ children }: AppLayoutProps) => {
   const classes = useStyles();
   const router = useRouter();
+  const open = true;
 
   return (
     <div>
-      <AppBar className={classes.appbar}>
+      <AppBar className={clsx(classes.appBar, { [classes.appBarShift]: open })}>
         <Toolbar>
           <Typography>my-assets</Typography>
         </Toolbar>
