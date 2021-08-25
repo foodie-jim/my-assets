@@ -35,7 +35,6 @@ module.exports = {
     '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/jsx-props-no-spreading': 'off',
-    'linebreak-style': ['error', 'windows'],
     'import/order': [
       'error',
       {
