@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Drawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
@@ -50,12 +50,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-// TODO See layout component
-// https://www.youtube.com/watch?v=DGn25s42NvQ
-// TODO Use class, React.Component?
+interface AppLayoutProps {
+  children: ReactNode;
+}
 
-//  const Top: FC<Props> = ({ children }) {
-function Layout({ children }) {
+const Layout = ({ children }: AppLayoutProps) => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -84,6 +83,6 @@ function Layout({ children }) {
       </div>
     </div>
   );
-}
+};
 
 export default Layout;
