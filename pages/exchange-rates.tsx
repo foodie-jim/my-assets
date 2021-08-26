@@ -9,7 +9,7 @@ interface SupProps {
 // TODO: use material-ui classes, layout.. not Home.modul.css ...
 // https://material-ui.com/components/drawers/#mini-variant-drawer
 
-const Sup: FC<SupProps> = ({ message }: SupProps) => {
+const ExchangeRates: FC<SupProps> = ({ message }: SupProps) => {
   return (
     <div>
       <Button color="primary" variant="contained">
@@ -27,4 +27,4 @@ export const getServerSideProps: GetServerSideProps = async () => {
   };
 };
 
-export default Sup;
+export default ExchangeRates;

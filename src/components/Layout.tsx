@@ -40,7 +40,26 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     page: {
       background: '#f9f9f9',
+    },
+    pageOpen: {
       width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
+    },
+    pageClose: {
+      width: `calc(100% - ${theme.spacing(7) + 1}px)`,
+      marginLeft: theme.spacing(7) + 1,
+      [theme.breakpoints.up('sm')]: {
+        width: `calc(100% - ${theme.spacing(9) + 1}px)`,
+        marginLeft: theme.spacing(9) + 1,
+      },
+      transition: theme.transitions.create(['width', 'margin'], {
+        easing: theme.transitions.easing.sharp,
+        duration: theme.transitions.duration.enteringScreen,
+      }),
     },
     drawer: {
       width: drawerWidth,
@@ -105,6 +124,8 @@ interface AppLayoutProps {
 }
 
 // TODO if drawer is open, main page width, location should be changed
+// TODO next.js redux 사용해서 Layout menu button open 값을 state 관리해보기
+// https://www.youtube.com/watch?v=MR43-gYVQbI
 
 const Layout = ({ children }: AppLayoutProps) => {
   const classes = useStyles();
@@ -167,7 +188,12 @@ const Layout = ({ children }: AppLayoutProps) => {
           ))}
         </List>
       </Drawer>
-      <div className={classes.page}>
+      <div
+        className={clsx(classes.page, {
+          [classes.pageOpen]: open,
+          [classes.pageClose]: !open,
+        })}
+      >
         <div className={classes.toolbar} />
         {children}
       </div>
