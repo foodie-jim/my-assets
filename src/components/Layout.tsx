@@ -123,7 +123,6 @@ interface AppLayoutProps {
   children: ReactNode;
 }
 
-// TODO if drawer is open, main page width, location should be changed
 // TODO next.js redux 사용해서 Layout menu button open 값을 state 관리해보기
 // https://www.youtube.com/watch?v=MR43-gYVQbI
 
