@@ -17,16 +17,19 @@ import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { v4 as uuidv4 } from 'uuid';
 
 const drawerWidth = 240;
 
 const menuItems = [
   {
+    key: uuidv4(),
     text: 'Exchange Rates',
     icon: <MonetizationOnIcon color="secondary" fontSize="large" />,
     path: '/exchange-rates',
   },
   {
+    key: uuidv4(),
     text: 'Encrypted Currency',
     icon: <LockIcon color="secondary" fontSize="large" />,
     path: '/encrypted-currency',
@@ -155,7 +158,7 @@ const Layout = ({ children }: AppLayoutProps) => {
         </div>
         <List>
           {menuItems.map((item) => (
-            <Link href={item.path}>
+            <Link key={item.key} href={item.path}>
               <ListItem button key={item.text} className={router.pathname === item.path ? classes.active : undefined}>
                 <ListItemIcon>{item.icon}</ListItemIcon>
                 <ListItemText primary={item.text} />
