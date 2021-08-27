@@ -126,7 +126,7 @@ interface AppLayoutProps {
 // TODO next.js redux 사용해서 Layout menu button open 값을 state 관리해보기
 // https://www.youtube.com/watch?v=MR43-gYVQbI
 
-const Layout = ({ children }: AppLayoutProps) => {
+const AppBars = ({ children }: AppLayoutProps) => {
   const classes = useStyles();
   const theme = useTheme();
   const router = useRouter();
@@ -200,4 +200,4 @@ const Layout = ({ children }: AppLayoutProps) => {
   );
 };
 
-export default Layout;
+export default AppBars;

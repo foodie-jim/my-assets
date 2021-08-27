@@ -4,7 +4,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import theme from '@styles/theme';
-import Layout from '../src/components/Layout';
+import AppBars from '../src/components/app-bars';
 
 const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
   useEffect(() => {
@@ -25,9 +25,9 @@ const MyApp: FC<AppProps> = ({ Component, pageProps }: AppProps) => {
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <CssBaseline />
-        <Layout>
+        <AppBars>
           <Component {...pageProps} />
-        </Layout>
+        </AppBars>
       </ThemeProvider>
     </>
   );
