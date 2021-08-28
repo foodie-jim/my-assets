@@ -1,7 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
 
-// TODO BaseURL is not working
-
 class HttpClient {
   protected readonly instance: AxiosInstance;
 
