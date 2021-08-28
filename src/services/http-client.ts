@@ -6,7 +6,7 @@ class HttpClient {
   protected readonly instance: AxiosInstance;
 
   public constructor() {
-    const baseURL = process.env.SERVICE_URL;
+    const baseURL = process.env.NEXT_PUBLIC_BASE_URL;
 
     this.instance = axios.create({
       baseURL,
