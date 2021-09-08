@@ -1,2 +1,3 @@
 Logger 만들기.
 https://medium.com/gradeup/how-to-implement-custom-logger-in-nextjs-a0495cbfda53
+로거는 Heroku 로그창에서 출력되어야 한다.
