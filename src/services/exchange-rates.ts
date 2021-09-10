@@ -1,4 +1,5 @@
 import { AxiosRequestConfig } from 'axios';
+import { ExchangeRateResponseModel } from '@src/models/exchange-rates';
 import HttpClient from './http-client';
 
 class ExchangeRatesService extends HttpClient {
@@ -26,7 +27,7 @@ class ExchangeRatesService extends HttpClient {
     return this.instance || (this.instance = new this());
   }
 
-  public getExchangeRate = () => this.instance.get('/exchange-rates');
+  public getExchangeRate = () => this.instance.get<ExchangeRateResponseModel>('/exchange-rates');
 }
 
 export default ExchangeRatesService.Instance;
