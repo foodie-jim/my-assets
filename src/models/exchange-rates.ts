@@ -1,8 +1,6 @@
 interface ExchangeRateResponseModel {
-  quotes: Array<{
-    symbol: string;
-    value: Array<Quote>;
-  }>;
+  dollarIndex: Array<Quote>;
+  exchangeRates: Array<Quote>;
 }
 
 interface Quote {

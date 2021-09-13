@@ -9,17 +9,28 @@ import ExchangeRatesService from '@src/services/exchange-rates';
 // TODO: draw graph
 // https://devexpress.github.io/devextreme-reactive/react/chart/demos/line/line/
 
-const ExchangeRates: FC<ExchangeRateResponseModel> = ({ quotes }: ExchangeRateResponseModel) => {
-  console.log(quotes);
-  quotes.map((quote: Quote) => {
-    console.log(quote);
-  });
-  return <div />;
+const getValues = (values: Array<Quote>) => {
+  return (
+    <div>
+      {values.map((value: Quote) => (
+        <div>{value.close}</div>
+      ))}
+    </div>
+  );
+};
+
+const ExchangeRates: FC<ExchangeRateResponseModel> = ({ dollarIndex, exchangeRates }: ExchangeRateResponseModel) => {
+  return (
+    <div>
+      <div>{getValues(dollarIndex)}</div>
+      <div>{getValues(exchangeRates)}</div>
+    </div>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const response = await ExchangeRatesService.getExchangeRate();
-  
+
   return {
     props: response,
   };
