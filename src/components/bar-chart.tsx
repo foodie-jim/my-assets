@@ -1,4 +1,6 @@
-import { createClassFromSpec } from 'react-vega';
+import React from 'react';
+
+//https://github.com/vega
 
 const spec = {
   width: 400,
@@ -72,7 +74,7 @@ const spec = {
 
 // https://www.npmjs.com/package/react-vega
 
-const BarChart = createClassFromSpec({
+const BarChart: React.PureComponent = createClassFromSpec({
   spec,
 });
 

@@ -1,7 +1,5 @@
 import { FC } from 'react';
 import { GetServerSideProps } from 'next';
-import { Vega } from 'react-vega';
-import { Config, TopLevelSpec, compile } from 'vega-lite';
 // import { ExchangeRateResponseModel, Quote } from '@src/models/exchange-rates';
 // import ExchangeRatesService from '@src/services/exchange-rates';
 
