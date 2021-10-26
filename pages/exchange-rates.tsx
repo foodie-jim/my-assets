@@ -1,5 +1,7 @@
 import { FC } from 'react';
 import { GetServerSideProps } from 'next';
+import BarChart from '@src/components/bar-chart';
+
 // import { ExchangeRateResponseModel, Quote } from '@src/models/exchange-rates';
 // import ExchangeRatesService from '@src/services/exchange-rates';
 
@@ -33,10 +35,10 @@ import { GetServerSideProps } from 'next';
 
 // const ExchangeRates: FC<ExchangeRateResponseModel> = ({ dollarIndex, exchangeRates }: ExchangeRateResponseModel) => {
 // eslint-disable-next-line react/prop-types
-const ExchangeRates: FC = (vegaSpec) => {
+const ExchangeRates: FC = () => {
   return (
     <div>
-      <Vega spec={vegaSpec} actions={false} renderer="svg" />
+      <BarChart />
     </div>
   );
 };
@@ -44,38 +46,8 @@ const ExchangeRates: FC = (vegaSpec) => {
 export const getServerSideProps: GetServerSideProps = async () => {
   // const response = await ExchangeRatesService.getExchangeRate();
 
-  const vegaLiteSpec: TopLevelSpec = {
-    $schema: 'https://vega.github.io/schema/vega-lite/v5.json',
-    data: {
-      values: [
-        { a: 'A', b: 28 },
-        { a: 'B', b: 55 },
-        { a: 'C', b: 43 },
-        { a: 'D', b: 91 },
-        { a: 'E', b: 81 },
-        { a: 'F', b: 53 },
-        { a: 'G', b: 19 },
-        { a: 'H', b: 87 },
-        { a: 'I', b: 52 },
-      ],
-    },
-    mark: 'bar',
-    encoding: {
-      x: { field: 'a', type: 'nominal', axis: { labelAngle: 0 } },
-      y: { field: 'b', type: 'quantitative' },
-    },
-  };
-
-  const config: Config = {
-    bar: {
-      color: 'firebrick',
-    },
-  };
-
-  const vegaSpec = compile(vegaLiteSpec, { config }).spec;
-
   return {
-    props: vegaSpec,
+    props: {},
   };
 };
 

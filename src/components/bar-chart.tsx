@@ -1,6 +1,4 @@
-import React from 'react';
-
-//https://github.com/vega
+import { Vega } from 'react-vega';
 
 const spec = {
   width: 400,
@@ -16,66 +14,24 @@ const spec = {
       ],
     },
   ],
-  scales: [
-    {
-      name: 'xscale',
-      type: 'band',
-      domain: { data: 'table', field: 'category' },
-      range: 'width',
-    },
-    {
-      name: 'yscale',
-      domain: { data: 'table', field: 'amount' },
-      nice: true,
-      range: 'height',
-    },
-  ],
-  axes: [
-    { orient: 'bottom', scale: 'xscale' },
-    { orient: 'left', scale: 'yscale' },
-  ],
-  marks: [
-    {
-      type: 'rect',
-      from: { data: 'table' },
-      encode: {
-        enter: {
-          x: { scale: 'xscale', field: 'category', offset: 1 },
-          width: { scale: 'xscale', band: 1, offset: -1 },
-          y: { scale: 'yscale', field: 'amount' },
-          y2: { scale: 'yscale', value: 0 },
-        },
-        update: {
-          fill: { value: 'steelblue' },
-        },
-        hover: {
-          fill: { value: 'red' },
-        },
-      },
-    },
-    {
-      type: 'text',
-      encode: {
-        enter: {
-          align: { value: 'center' },
-          baseline: { value: 'bottom' },
-          fill: { value: '#333' },
-        },
-        update: {
-          x: { scale: 'xscale', signal: 'tooltip.category', band: 0.5 },
-          y: { scale: 'yscale', signal: 'tooltip.amount', offset: -2 },
-          text: { signal: 'tooltip.amount' },
-          fillOpacity: [{ test: 'datum === tooltip', value: 0 }, { value: 1 }],
-        },
-      },
-    },
+};
+
+const barData = {
+  table: [
+    { a: 'A', b: 28 },
+    { a: 'B', b: 55 },
+    { a: 'C', b: 43 },
+    { a: 'D', b: 91 },
+    { a: 'E', b: 81 },
+    { a: 'F', b: 53 },
+    { a: 'G', b: 19 },
+    { a: 'H', b: 87 },
+    { a: 'I', b: 52 },
   ],
 };
 
-// https://www.npmjs.com/package/react-vega
-
-const BarChart: React.PureComponent = createClassFromSpec({
-  spec,
-});
+const BarChart = () => {
+  return <Vega spec={spec} data={barData} />;
+};
 
 export default BarChart;
